@@ -1,3 +1,5 @@
+#1/Bi/bash
+
 #!/bin/bash
 
 USERID=$(id -u)
@@ -32,23 +34,3 @@ CHECK_ROOT(){
 echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
-
-dnf install mysql-server -y &>>$LOG_FILE_NAME
-VALIDATE $? "Installing MySQL Server"
-
-systemctl enable mysqld &>>$LOG_FILE_NAME
-VALIDATE $? "Enabling MySQL Server"
-
-systemctl start mysqld &>>$LOG_FILE_NAME
-VALIDATE $? "Starting MySQL Server"
-
-mysql -h mysql.devops2025.shop -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE_NAME
-
-if [ $? -ne 0 ]
-then
-    echo "MySQL Root password not setup" &>>$LOG_FILE_NAME
-    mysql_secure_installation --set-root-pass ExpenseApp@1
-    VALIDATE $? "Setting Root Password"
-else
-    echo -e "MySQL Root password already setup ... $Y SKIPPING $N"
-fi
