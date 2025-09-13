@@ -29,8 +29,6 @@ CHECK_ROOT(){
     fi
 }
 
-mkdir -p expense-logs
-
 echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
