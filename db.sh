@@ -29,11 +29,11 @@ CHECK_ROOT(){
     fi
 }
 
+mkdir -p expense-logs
+
 echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
-
-mkdir -p expense-logs
 
 dnf install mysql-server -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing MySQL Server"
